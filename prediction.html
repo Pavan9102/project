@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <title>Automated Bird Species Identification using Audio Signal Processing and Neural Network</title>
+    <!-- CSS FILES -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;700&display=swap" rel="stylesheet">
+    <link href="../static/css/bootstrap.min.css" rel="stylesheet">
+    <link href="../static/css/bootstrap-icons.css" rel="stylesheet">
+    <link href="../static/css/templatemo-leadership-event.css" rel="stylesheet">
+    <style>
+        /* Adjust image size */
+        .bird-image {
+            width: 200px; /* Adjust the width as needed */
+            height: auto; /* Maintain aspect ratio */
+        }
+    </style>
+</head>
+<body>
+    <nav class="navbar navbar-expand-lg">
+        <div class="container">
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <a href="index.html" class="navbar-brand mx-auto mx-lg-0">
+                <i class="bi-bullseye brand-logo"></i>
+                <span class="brand-text" style="font-size: 30px; margin-top: 10px; font-style: italic;text-transform: capitalize;">avi-audio net</span>
+            </a>
+            <a class="nav-link custom-btn btn d-lg-none" href="#"></a>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item">
+                        <a class="nav-link click-scroll" href="{{url_for('first')}}" style="font-style: italic;">Home</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link click-scroll" href="{{url_for('login')}}" style="font-style: italic;">Login</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link click-scroll" href="{{url_for('index')}}" style="font-style: italic;">Preview</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link click-scroll" href="{{url_for('chart')}}" style="font-style: italic;">Chart</a>
+                    </li>
+                </ul>
+                <div>
+            </div>
+        </nav>
+        <main>
+            <section class="contact section-padding" id="section_7">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-lg-8 col-12 mx-auto">
+                            <form class="custom-form contact-form bg-white shadow-lg" action="#" method="post" role="form">
+                                <center>
+                                    <h2 style="font-style: italic;">Prediction</h2>
+                                </center>
+                                <div class="row">
+                                    <center>
+                                        <center>
+                                            <h3 class="title-a" style="font-style: italic;">Bird Species Identification using Audio Signal Processing</h3>
+                                        </center>
+                                        <br>
+                                        <br>
+                                        <div style="margin-left:150px">
+                                            <body>
+                                                <div class="navbar-header col-md-1 col-sm-1"></div>
+                                                <div class="content">
+                                                    <div class="col-lg-12">
+                                                        {% if prediction %}
+                                                        <div class="col-md-6 col-lg-6" style="margin-left:-120px">
+                                                            <audio controls>
+                                                                <source src="{{audio_path}}" type="audio/wav">
+                                                            </audio>
+                                                        </div>
+                                                        <br>
+                                                        <br>
+                                                        <center>
+                                                            <div class="col-md-6 col-lg-6" style="margin-left:-100px">
+                                                                <h3>{{ prediction }}</h3>
+                                                                <!-- Display the predicted bird species image -->
+                                                                {% if prediction == 'Song Sparrow' %}
+                                                                    <img src="{{ url_for('static', filename='DATASET/photos/song sparrow.jpg') }}" alt="Song Sparrow Image" class="bird-image">
+                                                                {% elif prediction == 'Northern Mockingbird' %}
+                                                                    <img src="{{ url_for('static', filename='DATASET/photos/Northern Mockingbird.jpg') }}" alt="Northern Mockingbird Image" class="bird-image">
+                                                                {% elif prediction == 'Northern Cardinal' %}
+                                                                    <img src="{{ url_for('static', filename='DATASET/photos/northern cardinal.jpg') }}" alt="Northern Cardinal Image" class="bird-image">
+                                                                {% elif prediction == 'American Robin' %}
+                                                                    <img src="{{ url_for('static', filename='DATASET/photos/american robin.jpg') }}" alt="American Robin Image" class="bird-image">
+                                                                {% elif prediction == 'Bewick\'s Wren' %}
+                                                                    <img src="{{ url_for('static', filename='DATASET/photos/bewicks wren.jpg') }}" alt="Bewick's Wren Image" class="bird-image">
+                                                                {% elif prediction == 'Common Cuckoo' %}
+                                                                    <img src="{{ url_for('static', filename='DATASET/photos/Common Cuckoo.jpg') }}" alt="Common Cuckoo Image" class="bird-image">
+                                                                {% elif prediction == 'Eurasian Bluetit' %}
+                                                                    <img src="{{ url_for('static', filename='DATASET/photos/Eurasian Bluetit.jpg') }}" alt="Eurasian Bluetit Image" class="bird-image">
+                                                                {% elif prediction == 'European Goldfinch' %}
+                                                                    <img src="{{ url_for('static', filename='DATASET/photos/European Goldfinch.jpg') }}" alt="European Goldfinch Image" class="bird-image">
+                                                                {% elif prediction == 'House Sparrow' %}
+                                                                    <img src="{{ url_for('static', filename='DATASET/photos/House Sparrow.jpg') }}" alt="House Sparrow Image" class="bird-image">
+                                                                {% elif prediction == 'Eurasian Jay' %}
+                                                                    <img src="{{ url_for('static', filename='DATASET/photos/Eurasian Jay.jpg') }}" alt="Eurasian Jay Image" class="bird-image">
+                                                                {% endif %}
+                                                            </div>
+                                                        </center>
+                                                        {% endif %}
+                                                    </div>
+                                                </div>
+                                            </body>
+                                        </div>
+                                    </center>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </main>
+        <footer class="site-footer">
+            <div class="container">
+                <div class="row align-items-center">
+                    <div class="col-lg-12 col-12 border-bottom pb-5 mb-5">
+                        <div class="d-flex">
+                        </div>
+                    </div>
+                    <div class="col-lg-7 col-12">
+                    </div>
+                    <div class="col-lg-5 col-12 ms-lg-auto">
+                        <div class="copyright-text-wrap d-flex align-items-center">
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </footer>
+        <!-- JAVASCRIPT FILES -->
+        <script src="../static/js/jquery.min.js"></script>
+        <script src="../static/js/bootstrap.min.js"></script>
+        <script src="../static/js/jquery.sticky.js"></script>
+        <script src="../static/js/click-scroll.js"></script>
+        <script src="../static/js/custom.js"></script>
+    </body>
+</html>
